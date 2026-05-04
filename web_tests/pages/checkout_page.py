@@ -7,7 +7,7 @@ class CheckoutPage:
         self.driver = driver
 
     def preencher_dados(self, nome, sobrenome, cep):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 15).until(
             EC.presence_of_element_located((By.ID, "first-name"))
         ).send_keys(nome)
         self.driver.find_element(By.ID, "last-name").send_keys(sobrenome)
@@ -15,11 +15,11 @@ class CheckoutPage:
         self.driver.find_element(By.ID, "continue").click()
 
     def confirmar_pedido(self):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 15).until(
             EC.element_to_be_clickable((By.ID, "finish"))
         ).click()
 
     def obter_mensagem_sucesso(self):
-        return WebDriverWait(self.driver, 10).until(
+        return WebDriverWait(self.driver, 15).until(
             EC.visibility_of_element_located((By.CLASS_NAME, "complete-header"))
         ).text

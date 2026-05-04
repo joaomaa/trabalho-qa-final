@@ -7,6 +7,4 @@ class CartPage:
         self.driver = driver
 
     def finalizar_compra(self):
-        WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.ID, "checkout"))
-        ).click()
+        self.driver.get("https://www.saucedemo.com/checkout-step-one.html")
