@@ -14,7 +14,3 @@ class InventoryPage:
 
     def ir_para_carrinho(self):
         self.driver.get("https://www.saucedemo.com/cart.html")
-
-        WebDriverWait(self.driver, 10).until(
-            EC.url_contains("cart")
-        )

@@ -7,17 +7,17 @@ class CheckoutPage:
         self.driver = driver
 
     def preencher_dados(self, nome, sobrenome, cep):
-        self.driver.find_element(By.ID, "first-name").send_keys(nome)
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located((By.ID, "first-name"))
+        ).send_keys(nome)
         self.driver.find_element(By.ID, "last-name").send_keys(sobrenome)
         self.driver.find_element(By.ID, "postal-code").send_keys(cep)
         self.driver.find_element(By.ID, "continue").click()
 
     def confirmar_pedido(self):
-        # Espera o botão finish aparecer antes de clicar
-        botao = WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable((By.ID, "finish"))
-        )
-        botao.click()
+        ).click()
 
     def obter_mensagem_sucesso(self):
         return WebDriverWait(self.driver, 10).until(
