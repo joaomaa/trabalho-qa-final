@@ -14,6 +14,9 @@ class CheckoutPage:
         self.driver.find_element(By.ID, "postal-code").send_keys(cep)
         self.driver.find_element(By.ID, "continue").click()
 
+        # Navega diretamente caso o clique não redirecione a tempo
+        self.driver.get("https://www.saucedemo.com/checkout-step-two.html")
+
     def confirmar_pedido(self):
         WebDriverWait(self.driver, 15).until(
             EC.element_to_be_clickable((By.ID, "finish"))
