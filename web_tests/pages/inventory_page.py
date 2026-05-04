@@ -13,10 +13,9 @@ class InventoryPage:
 
     def ir_para_carrinho(self):
         WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.CLASS_NAME, "shopping_cart_link"))
+            EC.element_to_be_clickable((By.ID, "shopping_cart_container"))
         ).click()
 
-        # Aguarda confirmar que entrou no carrinho
         WebDriverWait(self.driver, 10).until(
             EC.url_contains("cart")
         )
