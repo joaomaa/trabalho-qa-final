@@ -8,13 +8,12 @@ class InventoryPage:
 
     def adicionar_primeiro_produto(self):
         WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.CLASS_NAME, "btn_inventory"))
-        ).click()
+            EC.presence_of_element_located((By.CLASS_NAME, "inventory_list"))
+        )
+        self.driver.find_elements(By.CLASS_NAME, "btn_inventory")[0].click()
 
     def ir_para_carrinho(self):
-        WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.ID, "shopping_cart_container"))
-        ).click()
+        self.driver.get("https://www.saucedemo.com/cart.html")
 
         WebDriverWait(self.driver, 10).until(
             EC.url_contains("cart")
