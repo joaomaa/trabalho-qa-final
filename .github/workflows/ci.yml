@@ -1,0 +1,59 @@
+name: CI - Testes Automatizados
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  testes-api:
+    name: Testes de API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: |
+          cd api_tests
+          pip install -r requirements.txt
+
+      - name: Rodar testes de API
+        run: |
+          cd api_tests
+          pytest tests/ -v
+
+  testes-web:
+    name: Testes Web (Selenium)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: |
+          cd web_tests
+          pip install -r requirements.txt
+
+      - name: Instalar Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Rodar testes Web
+        run: |
+          cd web_tests
+          pytest tests/ -v
+        env:
+          DISPLAY: :99
